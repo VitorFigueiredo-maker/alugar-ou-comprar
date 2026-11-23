@@ -5,13 +5,8 @@ const durationInput = document.querySelector('#duration');
 const results = document.querySelector('#results');
 const rentalLabel = document.querySelector('#rental-label');
 const durationUnit = document.querySelector('#duration-unit');
-const currency = new Intl.NumberFormat('pt-BR', {
-  style: 'currency',
-  currency: 'BRL'
-});
-const quantity = new Intl.NumberFormat('pt-BR', {
-  maximumFractionDigits: 1
-});
+const currency = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+const quantity = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 });
 
 function selectedUnit() {
   return form.querySelector('input[name="rate-unit"]:checked').value;
@@ -25,6 +20,7 @@ function updateUnitLabels() {
 }
 
 function hideResultsOnEdit() {
+  rentalInput.setCustomValidity('');
   results.hidden = true;
 }
 
@@ -78,7 +74,6 @@ form.addEventListener('submit', (event) => {
   event.preventDefault();
   showComparison();
 });
-
 form.addEventListener('input', hideResultsOnEdit);
 form.querySelectorAll('input[name="rate-unit"]').forEach((input) => {
   input.addEventListener('change', () => {
@@ -86,6 +81,4 @@ form.querySelectorAll('input[name="rate-unit"]').forEach((input) => {
     hideResultsOnEdit();
   });
 });
-
-rentalInput.addEventListener('input', () => rentalInput.setCustomValidity(''));
 updateUnitLabels();
