@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f3ed">
+  <meta name="description" content="Compare o custo estimado de alugar ou comprar um equipamento antes de decidir.">
+  <title>Alugar ou comprar? | Conta Leve</title>
+  <link rel="stylesheet" href="style.css?v=1">
+  <script src="script.js?v=1" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="Conta Leve, início">
+        <span class="brand-mark" aria-hidden="true">↗</span>
+        <span>conta<span class="brand-accent">leve</span></span>
+      </a>
+      <a class="code-link" href="https://github.com/VitorFigueiredo-maker/alugar-ou-comprar">Ver código <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="inicio">
+      <section class="hero-grid" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>DECIDA COM MAIS CLAREZA</p>
+          <h1 id="page-title">Alugar ou<br><span>comprar?</span></h1>
+          <p class="hero-description">Compare os custos para o período em que você precisa do equipamento. Uma conta simples para ajudar sua próxima decisão.</p>
+          <div class="hero-points" aria-label="Sobre a calculadora">
+            <div class="hero-point"><span aria-hidden="true">01</span>Sem cadastro</div>
+            <div class="hero-point"><span aria-hidden="true">02</span>Conta rápida</div>
+            <div class="hero-point"><span aria-hidden="true">03</span>Valores em reais</div>
+          </div>
+        </div>
+
+        <section class="calculator-card" aria-labelledby="calculator-title">
+          <div class="card-heading">
+            <div>
+              <p class="card-kicker">SIMULADOR DE CUSTOS</p>
+              <h2 id="calculator-title">Compare os cenários</h2>
+            </div>
+            <span class="currency-tag">BRL</span>
+          </div>
+          <p class="card-intro">Use os valores da compra e da oferta de aluguel que você encontrou.</p>
+
+          <form id="comparison-form">
+            <div class="field-grid">
+              <label class="field" for="purchase-price">
+                <span>Preço para comprar</span>
+                <span class="input-wrap"><span class="input-prefix">R$</span><input id="purchase-price" name="purchase-price" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="3.500,00" required></span>
+              </label>
+              <label class="field" for="rental-price">
+                <span id="rental-label">Aluguel por mês</span>
+                <span class="input-wrap"><span class="input-prefix">R$</span><input id="rental-price" name="rental-price" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="250,00" required></span>
+              </label>
+            </div>
+
+            <fieldset class="rate-fieldset">
+              <legend>Como o aluguel é cobrado?</legend>
+              <div class="rate-options">
+                <label class="rate-option"><input type="radio" name="rate-unit" value="month" checked><span>Por mês</span></label>
+                <label class="rate-option"><input type="radio" name="rate-unit" value="day"><span>Por dia</span></label>
+              </div>
+            </fieldset>
+
+            <label class="field duration-field" for="duration">
+              <span>Por quanto tempo vai usar?</span>
+              <span class="input-wrap duration-wrap"><input id="duration" name="duration" type="number" min="1" step="1" inputmode="numeric" placeholder="6" required><span class="duration-unit" id="duration-unit">meses</span></span>
+            </label>
+
+            <button class="compare-button" type="submit"><span>Comparar custos</span><span class="button-arrow" aria-hidden="true">→</span></button>
+            <p class="form-note"><span aria-hidden="true">i</span> A estimativa considera apenas o preço informado.</p>
+          </form>
+        </section>
+      </section>
+
+      <section class="results-card" id="results" aria-labelledby="result-title" aria-live="polite" aria-atomic="true" hidden>
+        <div class="results-heading">
+          <div>
+            <p class="card-kicker">RESULTADO DA SIMULAÇÃO</p>
+            <h2 id="result-title">Resultado</h2>
+            <p class="result-message" id="result-message"></p>
+          </div>
+          <span class="winner-badge" id="winner-badge"></span>
+        </div>
+        <div class="metrics-grid">
+          <article class="metric-card rent-metric"><span>Aluguel no período</span><strong id="rent-total">—</strong><small id="rent-caption">—</small></article>
+          <article class="metric-card buy-metric"><span>Compra à vista</span><strong id="purchase-total">—</strong><small>Preço informado</small></article>
+          <article class="metric-card difference-metric"><span>Diferença estimada</span><strong id="difference-total">—</strong><small id="difference-caption">—</small></article>
+        </div>
+        <div class="comparison-bars" aria-hidden="true">
+          <div class="bar-row"><span>Alugar</span><div class="bar-track"><span class="bar-fill rent-fill" id="rent-bar"></span></div></div>
+          <div class="bar-row"><span>Comprar</span><div class="bar-track"><span class="bar-fill buy-fill" id="purchase-bar"></span></div></div>
+        </div>
+        <p class="break-even" id="break-even"></p>
+      </section>
+
+      <section class="guide-section" aria-labelledby="guide-title">
+        <div class="guide-heading">
+          <p class="card-kicker">SEM COMPLICAÇÃO</p>
+          <h2 id="guide-title">Como funciona a comparação</h2>
+        </div>
+        <div class="guide-grid">
+          <article class="guide-card"><span class="guide-number">01</span><h3>Informe os preços</h3><p>Digite o valor de compra e a tarifa de aluguel que encontrou.</p></article>
+          <article class="guide-card"><span class="guide-number">02</span><h3>Escolha o período</h3><p>Selecione se o aluguel é cobrado por dia ou por mês e informe o tempo de uso.</p></article>
+          <article class="guide-card"><span class="guide-number">03</span><h3>Compare o total</h3><p>A calculadora multiplica a tarifa pelo período e compara com o preço de compra.</p></article>
+        </div>
+      </section>
+
+      <aside class="disclaimer"><span class="disclaimer-mark" aria-hidden="true">!</span><p><strong>Uma estimativa, não uma cotação.</strong> A conta não inclui frete, taxas, manutenção, seguro, depósito, descontos ou valor de revenda. Confira as condições antes de decidir.</p></aside>
+    </main>
+
+    <footer class="site-footer"><span>Feito para tomar decisões com mais informação.</span><span>Projeto de portfólio · <a href="https://github.com/VitorFigueiredo-maker">Vitor</a></span></footer>
+  </div>
+</body>
+            </html>
